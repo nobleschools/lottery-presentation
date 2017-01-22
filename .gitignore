@@ -1,0 +1,15 @@
+# venv
+activate
+
+# MS files
+~$*
+
+# Data
+*.csv
+
+# Templates
+templates/
+
+# Misc
+*.swp
+.DS_STORE
