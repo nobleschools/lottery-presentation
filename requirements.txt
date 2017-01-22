@@ -1,0 +1,5 @@
+lxml==3.7.2
+olefile==0.44
+Pillow==4.0.0
+python-pptx==0.6.2
+XlsxWriter==0.9.6
