@@ -1,4 +1,4 @@
-.. contents:: Table of Contents
+.. contents:: **Table of Contents**
 
 ************************
 generate_presentation.py
@@ -9,7 +9,7 @@ results. Call with two positional args:
 
 .. code:: bash
 
-  generate_presentation.py <lottery results csv file> <desired output file name>
+  generate_presentation.py <lottery_results_csv_file> <desired_output_filename>
 
 Assumes the csv is ordered by status: accepted students first,
 followed by waitlist students.  Column headers expected in the csv:
