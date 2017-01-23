@@ -1,9 +1,9 @@
 """
-Taken from http://pbpython.com/creating-powerpoint.html for details on this script.
+Taken from http://pbpython.com/creating-powerpoint.html.
 
-Requires https://python-pptx.readthedocs.org/en/latest/index.html
-Program takes a PowerPoint input file and generates a marked up version that
-shows the various layouts and placeholders in the template.
+Requires https://python-pptx.readthedocs.org/en/latest/index.html.  Program
+takes a PowerPoint input file and generates a marked up version that shows
+the various layouts and placeholders in the template.
 """
 
 from __future__ import print_function
@@ -12,8 +12,8 @@ import argparse
 
 
 def parse_args():
-    """ Setup the input and output arguments for the script
-    Return the parsed input and output files
+    """ Setup the input and output arguments for the script.
+    Return the parsed input and output files.
     """
     parser = argparse.ArgumentParser(description='Analyze powerpoint file structure')
     parser.add_argument('infile',

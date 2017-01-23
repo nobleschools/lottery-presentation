@@ -7,13 +7,12 @@ Generates a ppt presentation from csv dump of admission lottery results.
 Takes two positional args: <lottery results csv file> <desired output file name>.
 
 Column headers expected in the csv:
-    id
-    lottery_number
-    first_name
-    last_name
-    Elementary
+    - id
+    - lottery_number
+    - first_name
+    - last_name
+    - Elementary
 
-...
 """
 
 import argparse
@@ -48,17 +47,16 @@ class PresentationMaker():
 
     :param infile_name: name of csv lottery results file. Expects the following
                         column headers:
-
-                            id
-                            lottery_number
-                            first_name
-                            last_name
-                            Elementary
+                            - id
+                            - lottery_number
+                            - first_name
+                            - last_name
+                            - Elementary
 
     :param outfile_name: name to save ppt presentation as.
     """
 
-    TEMPLATE_FILENAME = "template.pptx"
+    TEMPLATE_FILENAME = "templates/template.pptx"
     TITLE_SLIDE_LAYOUT_INDEX = 0
     BODY_SLIDE_LAYOUT_INDEX = 1
     BODY_TEXT_PLACEHOLDER_INDEX = 1
