@@ -4,15 +4,16 @@
 lottery_presentation/generate_presentation.py
 
 Generates a ppt presentation from csv dump of admission lottery results.
-Takes two positional args: <lottery results csv file> <desired output file name>.
+Takes two positional args:
+*<lottery results csv file>* *<desired output file name>*.
 
 Assumes the csv is ordered by status: accepted students first, followed by
 waitlist students.  Column headers expected in the csv:
-    - id
-    - lottery_number
-    - first_name
-    - last_name
-    - Elementary
+- id
+- lottery_number
+- first_name
+- last_name
+- Elementary
 
 """
 
@@ -24,38 +25,18 @@ from pptx import Presentation
 from pptx.util import Inches
 
 
-def parse_args():
-    """
-    Setup the input and output arguments for the script.
-    Return the parsed input and output files.
-    """
-
-    parser = argparse.ArgumentParser(description=\
-        "Create a PowerPoint presentation from a csv of lottery results"
-    )
-    parser.add_argument('infile',
-                        type=argparse.FileType('r'),
-                        help='CSV file to read in'
-    )
-    parser.add_argument('outfile',
-                        type=argparse.FileType('w'),
-                        help='Output powerpoint'
-    )
-    return parser.parse_args()
-
-
 class PresentationMaker():
     """
-    :class:`PresentationMaker` class used to read data from a csv of lottery
-    results and add them to a :class:`pptx.Presentation` object.
+    :class:`PresentationMaker` is a manager object used to read data from a csv
+    of lottery results and add them to a :class:`pptx.Presentation` object.
 
     :param infile_name: name of csv lottery results file. Expects the following
                         column headers:
-                            - id
-                            - lottery_number
-                            - first_name
-                            - last_name
-                            - Elementary
+                            * id
+                            * lottery_number
+                            * first_name
+                            * last_name
+                            * Elementary
 
     :param outfile_name: filename to save ppt presentation as.
     """
@@ -78,7 +59,8 @@ class PresentationMaker():
 
     def make_presentation(self):
         """
-        Read in the infile csv, and save a pptx under the outfile name.
+        Read in data from the infile csv, and save a pptx
+        under the outfile name.
 
         Creates two sections (a title and set of following body slides) --
         one for admitted students, and one for waitlist students.
@@ -180,6 +162,26 @@ class PresentationMaker():
 
         if self.body_queue.qsize():
             self._add_body_slide()
+
+
+def parse_args():
+    """
+    Setup the input and output arguments for the script.
+    Return the parsed input and output files.
+    """
+
+    parser = argparse.ArgumentParser(description=\
+        "Create a PowerPoint presentation from a csv of lottery results"
+    )
+    parser.add_argument('infile',
+                        type=argparse.FileType('r'),
+                        help='CSV file to read in'
+    )
+    parser.add_argument('outfile',
+                        type=argparse.FileType('w'),
+                        help='Output powerpoint'
+    )
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
