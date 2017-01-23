@@ -4,8 +4,9 @@
 lottery_presentation/generate_presentation.py
 
 Generates a ppt presentation from csv dump of admission lottery results.
+Takes two positional args: <lottery results csv file> <desired output file name>.
 
-column headers (in order):
+Column headers expected in the csv:
     id
     lottery_number
     first_name
@@ -42,6 +43,19 @@ def parse_args():
 
 class PresentationMaker():
     """
+    :class:`PresentationMaker` class used to read data from a csv of lottery
+    results and add them to a :class:`pptx.Presentation` object.
+
+    :param infile_name: name of csv lottery results file. Expects the following
+                        column headers:
+
+                            id
+                            lottery_number
+                            first_name
+                            last_name
+                            Elementary
+
+    :param outfile_name: name to save ppt presentation as.
     """
 
     TEMPLATE_FILENAME = "template.pptx"
@@ -62,7 +76,7 @@ class PresentationMaker():
 
     def make_presentation(self):
         """
-        Saves a pptx as self.outfile_name.
+        Read in the infile csv, and save a pptx under the outfile name.
         """
 
         self._add_title_slide("Admitted Students")
@@ -74,17 +88,16 @@ class PresentationMaker():
             for row in reader:
                 # process enrolled slides
                 if row['lottery_number'] == "Offered":
-                    self._add_to_body(row)
+                    self._add_to_body_queue(row)
                 else:
                     # at some point switches to waitlist students
                     self._end_body_section()
                     self._add_title_slide("Waitlist Students")
-                    self._add_to_body(row)
+                    self._add_to_body_queue(row)
                     break
             # process the waitlist students
             for row in reader:
-                self._add_to_body(row)
-                #break
+                self._add_to_body_queue(row)
 
         self._end_body_section()
         self.presentation.save(self.outfile_name)
@@ -92,6 +105,10 @@ class PresentationMaker():
 
     def _add_title_slide(self, title_string=''):
         """
+        Helper function that adds a title slide with title_string text.
+
+        :param title_string: string to use as text on the title slide. Defaults
+                             to an empty string.
         """
         
         slide = self.presentation.slides.add_slide(self.title_layout)
@@ -100,6 +117,8 @@ class PresentationMaker():
 
     def _add_body_slide(self):
         """
+        Helper function that adds a body slide to the presentation, using
+        the rows in the body_queue to fill out the ROW_TEMPLATE.
         """
 
         body_slide = self.presentation.slides.add_slide(self.body_layout)
@@ -113,8 +132,13 @@ class PresentationMaker():
             new_bullet = text_frame.add_paragraph()
             new_bullet.text = self.ROW_TEMPLATE.format(**self.body_queue.get())
 
-    def _add_to_body(self, row_dict):
+    def _add_to_body_queue(self, row_dict):
         """
+        Helper function that adds a row to the body_queue.  If the queue size
+        exceeds the number of MAX_EXTRA_BULLETS to place on a body slide,
+        this function calls _add_body_slide.
+
+        :param row_dict: A row dictionary, as created by :class:`csv.DictReader`
         """
 
         self.body_queue.put(row_dict)
@@ -124,7 +148,11 @@ class PresentationMaker():
 
     def _end_body_section(self):
         """
+        Helper function that calls _add_body_slide if at least one row in the
+        body_queue, used to end the different body sections of the presentation
+        (enrolled and waitlist student sections).
         """
+
         if self.body_queue.qsize():
             self._add_body_slide()
 
@@ -134,13 +162,3 @@ if __name__ == "__main__":
     args = parse_args()
     presentation = PresentationMaker(args.infile.name, args.outfile.name)
     presentation.make_presentation()
-
-
-
-    # add title slide with text "Admitted students"
-
-    # add student info body slides until WL
-
-    # add title slide with text "Waitlist"
-
-    # add WL students body slides
