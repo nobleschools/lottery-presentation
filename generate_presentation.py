@@ -47,7 +47,7 @@ class PresentationMaker():
     TEMPLATE_FILENAME = "templates/template.pptx"
     TITLE_SLIDE_LAYOUT_INDEX = 0 # title text in middle of slide
     BODY_SLIDE_LAYOUT_INDEX = 5  # empty body section
-    
+
     ## body slide table spec
     MAX_ROWS     = 8 # in addition to header row on a body slide
     TOP_MARGIN   = Inches(1.7)
