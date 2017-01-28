@@ -20,3 +20,4 @@ templates/
 # Misc
 *.swp
 .DS_STORE
+_*
