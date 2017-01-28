@@ -5,38 +5,20 @@ generate_presentation.py
 ************************
 
 Generates a ppt presentation from csv dump of admission lottery
-results. Call with two positional args:
+results. Call with two positional args, eg.:
 
 .. code:: bash
 
-  generate_presentation.py <lottery results csv file> <desired output file name>
+  $ python generate_presentation.py <lottery results csv file> <desired output file name>
 
 Assumes the csv is ordered by status: accepted students first,
 followed by waitlist students.  Column headers expected in the csv:
 
-- id 
-- lottery_number
+- id
+- lottery_number (value will 'Offered' if student has been offered enrollment, otherwise 'WL# XXXX' if student on waitlist)
 - first_name
 - last_name
 - Elementary
-
-class generate_presentation.PresentationMaker(*infile_name*, *outfile_name*):
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A PresentationMaker instance is a manager object used to read data from a
-csv of lottery results and add them to a pptx.Presentation
-object.  The necessary steps are wrapped in its make_presentation method.
-
-Parameters:
-  * *infile_name* -- name of csv lottery results file.
-  * *outfile_name* -- filename to save ppt presentation as.
-
-**make_presentation()**:
-
-  Read in data from the infile csv, and save a pptx under the outfile name.
-
-  Creates two sections (a title and set of following body slides)
-  -- one for admitted students, and one for waitlist students.
 
 
 **************
