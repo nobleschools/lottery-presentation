@@ -25,12 +25,12 @@ def parse_args():
     return parser.parse_args()
 
 
-def analyze_ppt(input, output):
-    """ Take the input file and analyze the structure.
-    The output file contains marked up information to make it easier
+def analyze_ppt(input_filename, output_filename):
+    """ Take the input_filename file and analyze the structure.
+    The output_filename file contains marked up information to make it easier
     for generating future powerpoint templates.
     """
-    prs = Presentation(input)
+    prs = Presentation(input_filename)
     # Each powerpoint file has multiple layouts
     # Loop through them all and  see where the various elements are
     for index, _ in enumerate(prs.slide_layouts):
@@ -52,7 +52,7 @@ def analyze_ppt(input, output):
                 except AttributeError:
                     print("{} has no text attribute".format(phf.type))
                 print('{} {}'.format(phf.idx, shape.name))
-    prs.save(output)
+    prs.save(output_filename)
 
 
 if __name__ == "__main__":
