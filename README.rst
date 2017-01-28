@@ -11,10 +11,10 @@ results. Call with two positional args, eg.:
   $ python generate_presentation.py <lottery results csv file> <desired output file name>
 
 Assumes the csv is ordered by enrollment status (value of the 'lottery_number' field): accepted students first,
-followed by waitlist students.  Column headers expected in the csv:
+followed by waitlist students.  Column headers expected in the csv are:
 
 - id
-- lottery_number (value will 'Offered' if student has been offered enrollment, otherwise 'WL# XXXX' if student on waitlist)
+- lottery_number (value is 'Offered' if student has been offered enrollment, otherwise 'WL# XXXX' if student on waitlist)
 - first_name
 - last_name
 - Elementary
