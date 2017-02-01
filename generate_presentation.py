@@ -88,7 +88,7 @@ class PresentationMaker():
 
             # process enrolled slides
             for row in reader:
-                if row['lottery_number'] == "Offered":
+                if row['lottery_number'].startswith("Offered"):
                     self._add_to_body_queue(row)
                 else:
                     # at some point switches to waitlist students
