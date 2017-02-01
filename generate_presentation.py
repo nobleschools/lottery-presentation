@@ -57,7 +57,7 @@ class PresentationMaker():
     COL_1_WIDTH  = Inches(3.0)
     COL_2_WIDTH  = Inches(2.0)
     COL_3_WIDTH  = Inches(5.0)
-    NAME_FORMAT  = "{last_name}, {first_name}"
+    NAME_FORMAT  = "{first_name} {last_name}"
     NOBLE_NAVY   = RGBColor(0, 67, 120)
 
 
