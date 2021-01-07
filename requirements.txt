@@ -1,4 +1,4 @@
-lxml==3.7.2
+lxml==4.6.2
 olefile==0.44
 Pillow==7.1.0
 python-pptx==0.6.2
